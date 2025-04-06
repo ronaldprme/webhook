@@ -1,0 +1,11 @@
+flask>=2.2
+gspread
+oauth2client
+pandas
+google-api-python-client 
+google-auth 
+google-auth-oauthlib 
+google-auth-httplib2
+matplotlib
+numpy
+reportlab==3.6.12
