@@ -95,11 +95,19 @@ def processar_respostas(caminho_respostas, caminho_paragrafos):
                     paragrafos_relatorio.append(row['PARAGRAFO'])
 
         paragrafos_relatorio.append("<PAGEBREAK>")
-        paragrafos_relatorio.append("<b>Conclusão</b>")
-        paragrafos_conclusao = paragrafos_df[paragrafos_df['TIPO'].str.contains(r'^CON\d+', regex=True, case=False)]
-        for _, row in paragrafos_conclusao.iterrows():
-            if row['RESPOSTA'].strip().upper() == tn:
-                paragrafos_relatorio.append("<TAB>" + row['PARAGRAFO'])
+        paragrafos_relatorio.append("<b>Considerações finais</b>")
+        
+
+        final_query = paragrafos_df[paragrafos_df['TIPO'].str.contains(r'^FINAL\d+', flags=re.IGNORECASE, regex=True)]
+        for _, row in final_query.iterrows():
+            final = row['PARAGRAFO']
+            paragrafos_relatorio.append(f"<TAB>{final}")
+
+
+        # paragrafos_conclusao = paragrafos_df[paragrafos_df['TIPO'].str.contains(r'^FINAL\d+', regex=True, case=False)]
+        # for _, row in paragrafos_conclusao.iterrows():
+        #     if row['RESPOSTA'].strip().upper() == tn:
+        #         paragrafos_relatorio.append("<TAB>" + row['PARAGRAFO'])
 
         gerar_relatorio(
             f"output/relatorios/Teste_de_Trauma_{submission_id}_{nome}.pdf",

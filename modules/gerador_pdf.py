@@ -229,4 +229,17 @@ def gerar_relatorio(nome_arquivo, nome, sobrenome, email, total, paragrafos, sub
             story.append(Paragraph(p, styles['TextoNormal']))
             story.append(Spacer(1, 4))  # Espaçamento padrão para páginas subsequentes
 
+     # Adiciona uma quebra de página antes da imagem final
+    # story.append(PageBreak())
+
+    # Adiciona a imagem após a última página
+    imagem_final_path = "data/piramide.png"  # Substitua pelo caminho da sua imagem
+    try:
+        img_final = Image(imagem_final_path, width=400, height=300)  # Ajuste o tamanho conforme necessário
+        img_final.hAlign = 'CENTER'
+        story.append(img_final)
+    except Exception as e:
+        print(f"[ERRO] Imagem final não carregada: {e}")
+
+
     doc.build(story)
